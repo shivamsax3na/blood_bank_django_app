@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{# title for home page #}
+{% block jinjatitle %} Home {% endblock %}
+
+{% block jinjabody %}
+
+
+
+{# CAROUSEL CODE BS4 #}
+{# ################# #}
+{# ################# #}
+{# ################# #}
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></li>
+    <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"></li>
+    <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://source.unsplash.com/IfhHgroyKsc/1600x400" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 >First slide label</h5>
+        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://source.unsplash.com/X20g2GQsVdA/1600x400" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Second slide label</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://source.unsplash.com/bivb76x323s/1600x400" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Third slide label</h5>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+      </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
+</div>
+{# CAROUSEL BS4 ENDS HERE #}
+<br><br>
+{# BS4 Card For about #}
+<div class="container">
+	<div class="card text-center">
+  <div class="card-header">
+    Join The Comunity
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Donate blood today</h5>
+    <p class="card-text">According to google more than 20 thousand people die out of lack of blood doners, See how we help people to connect with doners and our other initiatives (<a href="#">know more</a>).</p>
+
+    {% if user.is_authenticated %}
+
+
+
+    {% else %}
+
+    <a href="{% url 'register' %}" class="btn btn-danger">Join Big Blood Campaign</a>
+
+
+    {% endif %}
+
+  
+  </div>
+  <div class="card-footer text-muted">
+    Serve a Cause!
+  </div>
+</div>
+</div>
+
+<br><br>
+
+{# Display #}
+{# ####### #}
+
+
+
+<div>
+	<center>
+		<h1 class="display-4">There are a lot of lives you can save!</h1><br>
+
+    {% if user.is_authenticated %}
+
+
+
+    {% else %}
+
+    <span><a href="{% url 'login' %}">Log in</a> to Add Request!.</span>
+
+    {% endif %}
+
+
+
+	</center>
+</div>
+
+
+
+<br><br>		
+
+
+<div class="row row-cols-auto gy-3 px-5">
+    
+  
+
+	{% for post in object_list %}
+
+	
+	<div class="">
+	
+
+		<div class="col px-2 py-2">
+	    	<div class="card text-center" style="width: 18rem;">
+	  			<div class="card-body">
+	    			<h5 class="card-title">{{ post.title }}</h5>
+	    			<h6 class="card-subtitle mb-2 text-muted">Req:{{ post.bloodgroup }}</h6>
+	    			<p class="card-text">{{ post.situation }}</p>
+            
+            {% if user.is_authenticated and user.id == post.doner.id %}
+
+
+            <a href="{% url 'UpdatePost' post.pk %}" class="card-link">Edit</a>  
+
+            <a href="{% url 'DonerDetailView' post.pk %}" class="card-link">Know More</a>
+
+            {% else %}
+
+            <a href="{% url 'DonerDetailView' post.pk %}" class="card-link">Know More</a>
+            
+            {% endif %}
+            
+	  			</div>
+			</div>
+	    </div>
+
+	</div>
+
+	{% endfor %}
+
+</div>
+  
+
+{# rough work #}
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block jinjafooter %}
+	
+{% endblock jinjafooter %}
+
+{# 
+	<li>
+	{% for post in object_list %}
+	<ul><a href="{% url 'DonerDetailView' post.pk %}">{{ post.title }}</a></ul>
+	{% endfor %}
+	<li> #}

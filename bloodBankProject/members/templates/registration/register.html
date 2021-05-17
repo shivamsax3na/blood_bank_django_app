@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block jinjatitle %}Register{% endblock jinjatitle %}
+
+{% block jinjabody %}
+<div class="container">
+
+	<h1>Register</h1>
+
+		<div class="form-group">
+		
+			<form method="POST">
+			{% csrf_token %}
+			{{ form.as_p }}
+	
+		</div>
+	
+	<button class="btn btn-primary" >Sign in</button>
+
+
+	<br><br>
+	<a href="{% url 'login' %}">Login</a>
+
+
+</div>
+{% endblock jinjabody %}

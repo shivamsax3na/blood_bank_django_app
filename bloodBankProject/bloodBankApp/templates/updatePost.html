@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block jinjatitle %}Update Request{% endblock jinjatitle %}
+
+{% block jinjabody %}
+
+{% if user.is_authenticated %}
+
+	
+<div class="container">
+
+	<h1>Update request</h1>
+
+		<div class="form-group">
+		
+			<form method="POST">
+			{% csrf_token %}
+			{{ form.as_p }}
+		</div>
+	
+	<button class="btn btn-primary" >Update Request</button>
+
+</div>
+	
+	{% else %}
+	You're not allowed here
+
+{% endif %}
+
+{% endblock jinjabody %}

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+
+{% block jinjatitle %} Doner Details {% endblock %}
+
+{% block jinjabody %}
+<div class="container">
+
+<br><br><br><br>
+
+<h3>{{ post.title }}</h3><br>
+<span><small>{{ post.postDate }}</small></span>
+<br>
+<small>Name: {{ post.doner.first_name }} {{ post.doner.last_name }}</small>
+<br>
+
+{% if user.is_authenticated %}
+
+<span><small>Email:{{ post.doner.email }}</small></span>
+<br>
+<span><small>Ph:{{ post.doner.phone }}</small></span>
+
+{% else %}
+
+<br>
+<span><small>Email: ****@***.*** </small></span>
+<br>
+<span><small>Ph: XXXXX-XXXXX </small></span>
+<br>
+<span><small><i>You Must be logged in to see complete contact details </i></small></span>
+<br>
+
+{% endif %}
+
+{{ user.id }}
+
+{{ post.user.id }}
+
+{% if user.is_authenticated and user.id == post.user.id %}
+
+	<br>
+	<a href="{% url 'UpdatePost' post.pk %}">edit</a>
+	<br>
+	<a href="{% url 'DeletePost' post.pk %}">Delete this post</a>
+
+{% endif %}
+
+<br>
+<a href="{% url 'home' %}" class="btn btn-primary">Back</a>
+
+
+</div>
+{% endblock %}
+

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block jinjatitle %}Doners List{% endblock jinjatitle %}
+
+{% block jinjabody %}
+	<li>
+	{% for post in object_list %}
+	<ul><a href="{% url 'DonerListView' post.pk %}">{{ post.title }}</a></ul>
+	{% endfor %}
+	<li>
+{% endblock %}
